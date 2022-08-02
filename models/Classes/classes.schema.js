@@ -6,13 +6,17 @@ const ClassesSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+
     StudentIDs: {
         type: [mongoose.Schema.Types.ObjectId],
-        ref: 'User'
+        ref: 'User',
+        default: []
     },
+
     Stories: {
         type: [mongoose.Schema.Types.ObjectId],
-        ref: 'Story'
+        ref: 'Story',
+        default: []
     }
 });
 

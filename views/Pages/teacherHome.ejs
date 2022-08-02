@@ -1,0 +1,12 @@
+<%- include('../partials/header')%>
+<ul>
+    <% classes.forEach(function(classObject) { %>
+        <li><%= classObject.name%></li>
+    <%})%>
+</ul>
+
+<form action="/class/create" method="post">
+    <h1>Create Class</h1>
+    <input name="name" placeholder="Enter class name" required/>
+    <button>Create</button>
+</form>
