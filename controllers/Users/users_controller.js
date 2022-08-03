@@ -1,4 +1,5 @@
- 
+const bcrypt = require('bcrypt')
+const UserModel = require("../../models/users/user.schema");
 
 class UsersController {
     constructor() {}
@@ -69,7 +70,7 @@ class UsersController {
                 return
             }
 
-            const hash = await bcrypt.hash(req.body.password, 10);
+            const hash = await bcrypt.password(req.body.password, 10);
             
             await UserModel.create({
                 name: req.body.name,
