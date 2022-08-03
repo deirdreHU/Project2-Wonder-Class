@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const methodOverride = require('method-override')
 const mongoose = require("mongoose");
 const session = require('express-session')
 
@@ -35,8 +36,21 @@ app.post('/users/login', loginValidator, UsersController.login);
 app.post('/users/logout', UsersController.logout);
 app.get('/users/profile', PagesController.showProfile);
 
-app.post('/class/create', isAuthenticated, isTeacher, ClassesController.createClass);
-app.post('/class/add-student', isAuthenticated, isTeacher, ClassesController.addStudent);
+app.get('/students/find/:student_name', isAuthenticated, isTeacher, UsersController.findStudentNames); 
+
+app.post('/class/create', isAuthenticated, isTeacher, createClassValidator, ClassesController.createClass);
+app.get('/class/create', PagesController.showCreateClass);
+app.get('/class/delete/:classID', isAuthenticated, isTeacher, ClassesController.deleteClass);
+
+app.get('/class/:classID/students', isAuthenticated, isTeacher, PagesController.showClassStudents);
+app.get('/class/:classID/stories', isAuthenticated, isTeacher, PagesController.showClassStories);
+app.get('/class/detail/:classID', isAuthenticated, isTeacher, (req, res) => {
+  const {classID} = req.params;
+  res.redirect(`/class/${classID}/students`);
+});
+
+app.get('/class/:classID/students/add', isAuthenticated, isTeacher, PagesController.showAddStudent);
+app.post('/class/:classID/students/add', isAuthenticated, isTeacher, ClassesController.addStudent);
 
 app.listen(PORT, async () => {
     try {

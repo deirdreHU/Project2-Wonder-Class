@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const UserModel = require("../../models/users/user.schema");
+const UserModel = require("../../models/Users/user.schema");
 
 class UsersController {
     constructor() {}

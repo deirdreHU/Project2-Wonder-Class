@@ -1,5 +1,6 @@
 const ClassesModel = require("../../models/Classes/classes.schema");
 const UsersModel = require("../../models/Users/user.schema")
+const bcrypt = require('bcrypt')
 const mongoose = require("mongoose");
 
 
