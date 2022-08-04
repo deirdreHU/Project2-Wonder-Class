@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 const UsersController = require("./controllers/users/users_controller");
 const PagesController = require("./controllers/pages/pages_controllers");
 const ClassesController = require("./controllers/classes/classes_controllers");
-const {registerValidator, loginValidator} = require("./middlewares/validator");
+const {registerValidator, loginValidator, createClassValidator} = require("./middlewares/validator");
 const {isAuthenticated, isTeacher} = require("./middlewares/auth.middleware");
 
 // Set view engine
@@ -45,8 +45,8 @@ app.get('/class/delete/:classID', isAuthenticated, isTeacher, ClassesController.
 app.get('/class/:classID/students', isAuthenticated, isTeacher, PagesController.showClassStudents);
 app.get('/class/:classID/stories', isAuthenticated, isTeacher, PagesController.showClassStories);
 app.get('/class/detail/:classID', isAuthenticated, isTeacher, (req, res) => {
-  const {classID} = req.params;
-  res.redirect(`/class/${classID}/students`);
+    const {classID} = req.params;
+    res.redirect(`/class/${classID}/students`);
 });
 
 app.get('/class/:classID/students/add', isAuthenticated, isTeacher, PagesController.showAddStudent);

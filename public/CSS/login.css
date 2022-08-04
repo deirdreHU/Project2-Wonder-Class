@@ -1,0 +1,22 @@
+.wrapper {
+    margin: auto;
+    margin-top: 10vh;
+    width: 700px;
+    height: 500px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 5px #333;
+    overflow: hidden;
+}
+.tipWrapper {
+    background: #4F5D73;
+    color: white;
+    box-sizing: border-box;
+    padding: 20px;
+    height: 100%;
+}
+.formWrapper {
+    box-sizing: border-box;
+    padding: 20px;
+    height: 100%;
+}

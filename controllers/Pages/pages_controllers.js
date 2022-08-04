@@ -3,16 +3,12 @@ const ClassesModel = require("../../models/Classes/classes.schema");
 class PageController {
     constructor() {}
 
-    showLogin(req, res) {
-        res.render('pages/login');
-    }
-
     showRegister(req, res) {
         res.render('pages/register');
     }
 
-    showProfile(req, res) {
-        res.render('pages/profile')
+    showLogin(req, res) {
+        res.render('pages/login');
     }
 
     async showTeacherHome(req, res) {
@@ -33,6 +29,51 @@ class PageController {
         } else {
             res.render('pages/error');
         }
+    }
+
+    showProfile(req, res) {
+        res.render('pages/profile')
+    }
+
+    showCreateClass(req, res) {
+        res.render('pages/createClass');
+    }
+
+    showAddStudent(req, res) {
+        const {classID} = req.params;
+        res.render('pages/addStudent', {
+            classID
+        })
+    }
+
+    async showClassStudents(req, res) {
+        const {classID} = req.params;
+        const classes = await ClassesModel.aggregate([
+            {
+                $match: {
+                    _id: new mongoose.mongo.ObjectId(classID)
+                }
+            },
+            {
+                $lookup: {
+                    from: 'users',
+                    localField: 'studentsIDs',
+                    foreignField: '_id',
+                    as: 'students'
+                }
+            }
+        ]);
+        res.render('pages/classStudents', {
+            classID,
+            students: classes[0].students
+        });
+    }
+
+    showClassStories(req, res) {
+        const {classID} = req.params;
+        res.render('pages/classStories', {
+            classID
+        });
     }
 }
 

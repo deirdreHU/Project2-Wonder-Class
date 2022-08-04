@@ -17,6 +17,7 @@ class ClassesController {
                 res.send("Class Exists!");
                 return
             }
+
             const newClass = await ClassesModel.create({
                 name,
                 teacherID: user._id
@@ -26,8 +27,6 @@ class ClassesController {
 
         } catch (err) {
             console.log(err);
-            res.send("fail to create class")
-            return
         }
     }
 
@@ -36,33 +35,50 @@ class ClassesController {
             const { classID } = req.params;
             const { email, name, password } = req.body;
 
-            const student = await UsersModel.findOne({email});
+            const student = await UsesModel.findOne({name});
             const classObject = await ClassesModel.findById(classID);
             let studentID;
-
+            const hash = await bcrypt.hash(password, 10);
+    
             if (student) {
-                studentID = student._id;
+                if (classObject.studentsIDs.find(item => item.toString() === student._id.toString())) {
+                    res.send("This student has been added!");
+                    return
+                } else {
+                    studentID = student._id;
+                }
+
             } else {
-                let newStudent = await UsersModel.create({
+                let newStudent = await UsesModel.create({
                     role: 'student',
                     name,
                     email,
-                    password
+                    password: hash
                 });
+
                 studentID = newStudent._id;
             }
-
+            
             classObject.studentsIDs.push(mongoose.mongo.ObjectId(studentID));
             
-            res.redirect('/');
-
+            await classObject.save();
+            
+            res.redirect(`/class/${classID}/students`);
+            
         } catch (err) {
             console.log(err);
-            res.send("fail to add students")
-            return
+        }
+    }
 
+    async deleteClass(req, res) {
+        try {
+            const {classID} = req.params;
+            await ClassesModel.findByIdAndDelete(classID);
+            res.redirect('/');
+        } catch (err) {
+            console.log(err);
         }
     }
 }
 
-    module.exports = new ClassesController();
+module.exports = new ClassesController();
