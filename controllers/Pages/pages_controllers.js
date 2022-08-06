@@ -1,23 +1,20 @@
-const ClassesModel = require("../../models/Classes/classes.schema");
+const ClassesModel = require("../../models/classes/classes.schema");
+const StoriesModel = require("../../models/stories/stories.schema");
+const mongoose = require("mongoose")
 
 class PageController {
     constructor() {}
-
-    showRegister(req, res) {
-        res.render('pages/register');
-    }
 
     showLogin(req, res) {
         res.render('pages/login');
     }
 
-    async showTeacherHome(req, res) {
-        const classes = await ClassesModel.find();
-        res.render('pages/teacherHome', {classes});
+    showRegister(req, res) {
+        res.render('pages/register');
     }
 
-    async showStudentHome(req, res) {
-        res.render('pages/studentHome');
+    showProfile(req, res) {
+        res.render('pages/profile')
     }
 
     showHome(req, res) {
@@ -31,12 +28,36 @@ class PageController {
         }
     }
 
-    showProfile(req, res) {
-        res.render('pages/profile')
+    async showTeacherHome(req, res) {
+        const classes = await ClassesModel.find();
+        res.render('pages/teacherHome', {classes});
+    }
+    async showStudentHome(req, res) {
+        const user = req.user;
+        const classes = await ClassesModel.find({
+            studentsIDs: {
+            $in: mongoose.mongo.ObjectId(user._id)
+            }
+        });
+        res.render('pages/studentHome', {
+            classes
+        });
     }
 
     showCreateClass(req, res) {
         res.render('pages/createClass');
+    }
+
+
+    async showClass(req, res) {
+        const {classID} = req.params;
+        const stories = await StoriesModel.find({
+            classID: mongoose.mongo.ObjectId(classID)
+        });
+        res.render('pages/class', {
+            classID,
+            stories
+        })
     }
 
     showAddStudent(req, res) {
@@ -68,11 +89,20 @@ class PageController {
             students: classes[0].students
         });
     }
-
-    showClassStories(req, res) {
+    
+    showAddStory(req, res) {
         const {classID} = req.params;
+        res.render('pages/addStory', {classID})
+    }
+
+    async showClassStories(req, res) {
+        const {classID} = req.params;
+        const stories = await StoriesModel.find({
+            classID: mongoose.mongo.ObjectId(classID)
+        })
         res.render('pages/classStories', {
-            classID
+            classID,
+            stories
         });
     }
 }

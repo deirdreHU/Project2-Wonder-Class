@@ -30,6 +30,16 @@ class ClassesController {
         }
     }
 
+    async deleteClass(req, res) {
+        try {
+            const {classID} = req.params;
+            await ClassesModel.findByIdAndDelete(classID);
+            res.redirect('/');
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     async addStudent(req, res) {
         try {
             const { classID } = req.params;
@@ -70,15 +80,23 @@ class ClassesController {
         }
     }
 
-    async deleteClass(req, res) {
+    async addStory(req, res) {
         try {
-            const {classID} = req.params;
-            await ClassesModel.findByIdAndDelete(classID);
-            res.redirect('/');
-        } catch (err) {
-            console.log(err);
+            const user = req.user;
+            const { classID } = req.params;
+            const { title } = req.body;
+                
+            await StoriesModel.create({
+                classID: mongoose.mongo.ObjectId(classID),
+                title,
+                teacher: mongoose.mongo.ObjectId(user._id)
+            });
+            
+            res.redirect(`/class/${classID}/stories`);
+            } catch (err) {
+                console.log(err);
+            }
         }
-    }
 }
 
 module.exports = new ClassesController();

@@ -52,6 +52,9 @@ app.get('/class/detail/:classID', isAuthenticated, isTeacher, (req, res) => {
 app.get('/class/:classID/students/add', isAuthenticated, isTeacher, PagesController.showAddStudent);
 app.post('/class/:classID/students/add', isAuthenticated, isTeacher, ClassesController.addStudent);
 
+app.get('/class/:classID/stories/add', isAuthenticated, isTeacher, PagesController.showAddStory);
+app.post('/class/:classID/stories/add', isAuthenticated, isTeacher, ClassesController.addStory);
+
 app.listen(PORT, async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URL);
