@@ -1,12 +1,9 @@
 const mongoose = require('mongoose')
 
 const UsersSchema = new mongoose.Schema({
-    roles: {
-        type: [{
-            type: String,
-            enum: ['teacher', 'student']
-        }],
-        default: ['teacher']
+    role: {
+        type: String,
+        required: true
     },
 
     name: {

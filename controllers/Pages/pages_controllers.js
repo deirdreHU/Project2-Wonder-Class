@@ -100,10 +100,11 @@ class PageController {
     }
 
     showHome(req, res) {
-        const {role} = req.user;
-        if (role === 'teacher') {
+        const {roles} = req.user;
+        console.log(req.user)
+        if (roles.filter(role => role === "teacher").length > 0) {
             pageController.showTeacherHome(req, res);
-        } else if (role === 'student') {
+        } else if (roles.filter(role => role === "student").length > 0) {
             pageController.showStudentHome(req, res);
         } else {
             res.render('pages/error');
