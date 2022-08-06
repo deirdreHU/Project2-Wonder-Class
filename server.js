@@ -3,10 +3,11 @@ require("dotenv").config();
 const express = require("express");
 const methodOverride = require('method-override')
 const mongoose = require("mongoose");
-const session = require('express-session')
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const session = require('express-session')
 
 const UsersController = require("./controllers/users/users_controller");
 const PagesController = require("./controllers/pages/pages_controllers");

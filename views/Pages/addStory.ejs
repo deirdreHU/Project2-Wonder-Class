@@ -1,39 +1,48 @@
 <%- include('../partials/header')%>
+
 <link href="/css/teacherHome.css" rel="stylesheet" />
 <link href="/css/addStudent.css" rel="stylesheet" />
+
 <body>
 <%- include('../partials/homeHeaderBar')%>
+
 <div class="container wrapper">
     <div class="row">
+
         <div class="col-2">
             <ul class="nav nav-pills flex-column">
+
                 <li class="nav-item">
                     <a href="/" class="nav-link">
                         <i class="bi bi-arrow-left"></i>
                         Back
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="/class/<%=classID%>/students">Students</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link active" href="/class/<%=classID%>/stories">Stories</a>
                 </li>
+                
             </ul>
         </div>
+
         <div class="col-10">
             <h3>Add Story</h3>
             <form class="w-25" method="post" action="/class/<%=classID%>/stories/add">
                 <div class="mb-3 student-name">
                     <label class="form-label">Story Name</label>
                     <input name="title" required class="form-control" placeholder="Enter story name" />
-
                 </div>
                 <div class="mb-3">
                     <button class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>
+
     </div>
 </div>
 

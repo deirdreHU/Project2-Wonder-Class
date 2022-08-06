@@ -2,13 +2,12 @@ const bcrypt = require('bcrypt')
 const UserModel = require("../../models/Users/user.schema");
 
 class UsersController {
-    constructor() {}
-
+    constructor() {
+    }
 
     async findStudentNames(req, res) {
         try {
             const {student_name} = req.params;
-
             const students = await UserModel.find({
                 name: {
                     $regex: new RegExp(`.*${student_name}.*`)
@@ -16,7 +15,7 @@ class UsersController {
                 role: 'student'
             });
             //return an object
-            res.status(200).json(students);
+            res.json(students);
         } catch (err) {
             console.log(err);
         }
@@ -46,14 +45,16 @@ class UsersController {
     async login(req, res) {
         try {
             const {username, password} = req.body;
+            console.log("password value", password)
             const user = await UserModel.findOne({username});
+            console.log(user)
             const passwordMatches = await bcrypt.compare(password, user.password);
             
             if (!passwordMatches) {
-            res.send("incorrect password");
-            return
-            
-        }
+                res.send("incorrect password");
+                return
+            }
+
             // log the user in by creating a session
             req.session.regenerate(function (err) {
                 if (err) {
@@ -63,20 +64,20 @@ class UsersController {
     
                 // store user information in session, typically a user id
                 req.session.user = user;
-        
+    
                 // save the session before redirection to ensure page
                 // load does not happen before session is saved
                 req.session.save(function (err) {
                     if (err) {
-                        return next(err)
-                    }
-                    res.redirect('/')
+                    return next(err)
+                }
+                res.redirect('/')
                 })
             })
+
         } catch (err) {
             console.log(err);
             res.send('failed to login')
-            return
         }
     }
 

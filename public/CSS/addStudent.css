@@ -1,6 +1,7 @@
 .student-name {
     position: relative;
 }
+
 .student-names-list {
     position: absolute;
     top: 75px;
@@ -10,12 +11,14 @@
     background: white;
     box-shadow: 0 0 10px #9b9898;
 }
+
 .student-names-item {
     margin: 0;
     box-sizing: border-box;
     padding: 5px 10px;
     cursor: pointer;
 }
+
 .student-names-item:hover {
     background: gainsboro;
 }

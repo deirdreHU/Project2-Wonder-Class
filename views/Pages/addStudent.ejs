@@ -5,101 +5,123 @@
 <%- include('../partials/homeHeaderBar')%>
 <div class="container wrapper">
     <div class="row">
+
         <div class="col-2">
             <ul class="nav nav-pills flex-column">
+
                 <li class="nav-item">
                     <a href="/" class="nav-link">
                         <i class="bi bi-arrow-left"></i>
                         Back
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link active" href="/class/<%=classID%>/students">Students</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="/class/<%=classID%>/stories">Stories</a>
                 </li>
+
             </ul>
         </div>
+
         <div class="col-10">
             <h3>Add Student</h3>
+
             <form class="w-25" method="post" action="/class/<%=classID%>/students/add">
+
                 <div class="mb-3 student-name">
                     <label class="form-label">Student Name</label>
                     <input name="name" id="student-name" required class="form-control" placeholder="Enter student name" />
+                    
                     <div id="students-names-list" class="student-names-list">
 
                     </div>
                 </div>
+
                 <div id="student-info">
                     <div class="mb-3">
                         <label class="form-label">Student Email</label>
                         <input name="email" type="email" id="email" class="form-control" placeholder="Enter student email" />
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label">Student Password</label>
                         <input name="password" required id="password" class="form-control" type="password" placeholder="Enter student password" />
                     </div>
                 </div>
+
                 <div class="mb-3">
                     <button class="btn btn-primary">Submit</button>
                 </div>
-            </form>
-        </div>
-    </div>
-</div>
-<script>
-    let student_name = '';
-    let student_list = [];
-    const studentNameInput = document.querySelector('#student-name');
-    studentNameInput.addEventListener('input', (e) => {
-      student_name = e.target.value;
-      requestStudentList();
-      renderStudentInfoForm();
-      renderStudentsList();
-    });
-    renderStudentsList();
-    function clickStudentName(name) {
-      student_name = name;
-      studentNameInput.value = name;
-      renderStudentInfoForm();
-      document.querySelector('#students-names-list').style.display = 'none';
-    }
-    function renderStudentInfoForm() {
-      if (student_list.find(item => item.name === student_name)) {
-        document.querySelector('#student-info').style.display = 'none';
-        document.querySelector('#email').required = false;
-        document.querySelector('#password').required = false;
-      } else {
-        document.querySelector('#student-info').style.display = '';
-        document.querySelector('#email').required = true;
-        document.querySelector('#password').required = true;
-      }
-    }
-    function renderStudentsList() {
-      if (student_list.length === 0 || student_name === '') {
-        document.querySelector('#students-names-list').style.display = 'none';
-      } else {
-        document.querySelector('#students-names-list').style.display = '';
-        let innerHTML = '';
-        for (let student of student_list) {
-          innerHTML += `<p onclick="clickStudentName('${student.name}')" class="student-names-item">${student.name}</p>`;
-        }
-        document.querySelector('#students-names-list').innerHTML = innerHTML;
-      }
-    }
-    function requestStudentList() {
-        if (!student_name) {
-          student_list = [];
-        } else {
-          fetch(`/students/find/${student_name}`)
-            .then(res => res.json())
-            .then(data => {
-              student_list = data;
-              renderStudentsList();
-            })
-        }
-    }
 
-</script>
+            </form>
+        
+        </div>
+    
+    </div>
+
+</div>
+
+    <script>
+        let student_name = '';
+        let student_list = [];
+        const studentNameInput = document.querySelector('#student-name');
+        studentNameInput.addEventListener('input', (e) => {
+          student_name = e.target.value;
+          requestStudentList();
+          renderStudentInfoForm();
+          renderStudentsList();
+        });
+
+        renderStudentsList();
+
+        function clickStudentName(name) {
+          student_name = name;
+          studentNameInput.value = name;
+          renderStudentInfoForm();
+          document.querySelector('#students-names-list').style.display = 'none';
+        }
+
+        function renderStudentInfoForm() {
+          if (student_list.find(item => item.name === student_name)) {
+            document.querySelector('#student-info').style.display = 'none';
+            document.querySelector('#email').required = false;
+            document.querySelector('#password').required = false;
+          } else {
+            document.querySelector('#student-info').style.display = '';
+            document.querySelector('#email').required = true;
+            document.querySelector('#password').required = true;
+          }
+        }
+
+        function renderStudentsList() {
+          if (student_list.length === 0 || student_name === '') {
+            document.querySelector('#students-names-list').style.display = 'none';
+          } else {
+            document.querySelector('#students-names-list').style.display = '';
+            let innerHTML = '';
+            for (let student of student_list) {
+              innerHTML += `<p onclick="clickStudentName('${student.name}')" class="student-names-item">${student.name}</p>`;
+            }
+            document.querySelector('#students-names-list').innerHTML = innerHTML;
+          }
+        }
+        
+        function requestStudentList() {
+            if (!student_name) {
+              student_list = [];
+            } else {
+              fetch(`/students/find/${student_name}`)
+                .then(res => res.json())
+                .then(data => {
+                  student_list = data;
+                  renderStudentsList();
+                })
+            }
+        }
+
+    </script>
 </body>

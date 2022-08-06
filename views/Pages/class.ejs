@@ -1,19 +1,27 @@
 <%- include('../partials/header')%>
+
 <link href="/css/teacherHome.css" rel="stylesheet" />
+
 <body>
+
 <%- include('../partials/homeHeaderBar')%>
-<div class="container mt-3">
+
     <div class="container mt-3">
-        <% stories.forEach(function(item) { %>
-        <div class="card p-2 d-flex flex-column justify-content-between" style="width: 200px; height: 200px;">
-            <p class="h5">
-                <%=item.title%>
-            </p>
-            <div class="text-end">
-                <a class="btn btn-primary mt-auto"><i class="bi bi-arrow-right"></i></a>
+
+        <div class="container mt-3">
+            <% stories.forEach(function(item) { %>
+            <div class="card p-2 d-flex flex-column justify-content-between" style="width: 200px; height: 200px;">
+                <p class="h5">
+                    <%=item.title%>
+                </p>
+                
+                <div class="text-end">
+                    <a class="btn btn-primary mt-auto"><i class="bi bi-arrow-right"></i></a>
+                </div>
             </div>
+            <% }) %>
         </div>
-        <% }) %>
+
     </div>
-</div>
+
 </body>

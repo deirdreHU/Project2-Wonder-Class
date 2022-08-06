@@ -1,6 +1,7 @@
 body {
     background: whitesmoke;
 }
+
 .wrapper {
     border-radius: 10px;
     box-sizing: border-box;
@@ -9,14 +10,17 @@ body {
     height: 80vh;
     background: white;
 }
+
 .class-card {
     width: 200px;
     height: 200px;
     border-radius: 10px;
 }
+
 .create-class {
     cursor: pointer;
 }
+
 .create-class > i {
     font-size: 40px;
 }

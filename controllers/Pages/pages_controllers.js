@@ -4,7 +4,9 @@ const mongoose = require("mongoose");
 const {raw} = require("express");
 
 class PageController {
-    constructor() {}
+    constructor() {
+        
+    }
 
     showLogin(req, res) {
         res.render('pages/login');
@@ -99,7 +101,6 @@ class PageController {
 
     showHome(req, res) {
         const {role} = req.user;
-        console.log(role)
         if (role === 'teacher') {
             pageController.showTeacherHome(req, res);
         } else if (role === 'student') {
