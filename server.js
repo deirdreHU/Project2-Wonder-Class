@@ -33,8 +33,8 @@ app.get('/users/register', PagesController.showRegister);
 app.post('/users/register', registerValidator, UsersController.register);
 app.get('/users/login', PagesController.showLogin);
 app.post('/users/login', loginValidator, UsersController.login);
-app.post('/users/logout', UsersController.logout);
-app.get('/users/profile', PagesController.showProfile);
+app.get('/users/logout', UsersController.logout);
+app.get('/users/profile', isAuthenticated, PagesController.showProfile);
 
 app.get('/students/find/:student_name', isAuthenticated, isTeacher, UsersController.findStudentNames); 
 
@@ -42,6 +42,7 @@ app.post('/class/create', isAuthenticated, isTeacher, createClassValidator, Clas
 app.get('/class/create', PagesController.showCreateClass);
 app.get('/class/delete/:classID', isAuthenticated, isTeacher, ClassesController.deleteClass);
 
+app.get('/class/:classID', isAuthenticated, PagesController.showClass);
 app.get('/class/:classID/students', isAuthenticated, isTeacher, PagesController.showClassStudents);
 app.get('/class/:classID/stories', isAuthenticated, isTeacher, PagesController.showClassStories);
 app.get('/class/detail/:classID', isAuthenticated, isTeacher, (req, res) => {

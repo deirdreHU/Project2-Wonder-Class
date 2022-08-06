@@ -1,6 +1,7 @@
 const ClassesModel = require("../../models/classes/classes.schema");
 const StoriesModel = require("../../models/stories/stories.schema");
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+const {raw} = require("express");
 
 class PageController {
     constructor() {}
@@ -17,54 +18,15 @@ class PageController {
         res.render('pages/profile')
     }
 
-    showHome(req, res) {
-        const {role} = req.user;
-        if (role === 'teacher') {
-            pageController.showTeacherHome(req, res);
-        } else if (role === 'student') {
-            pageController.showStudentHome(req, res);
-        } else {
-            res.render('pages/error');
-        }
-    }
-
-    async showTeacherHome(req, res) {
-        const classes = await ClassesModel.find();
-        res.render('pages/teacherHome', {classes});
-    }
-    async showStudentHome(req, res) {
-        const user = req.user;
-        const classes = await ClassesModel.find({
-            studentsIDs: {
-            $in: mongoose.mongo.ObjectId(user._id)
-            }
-        });
-        res.render('pages/studentHome', {
-            classes
-        });
-    }
-
-    showCreateClass(req, res) {
-        res.render('pages/createClass');
-    }
-
-
-    async showClass(req, res) {
+    async showClassStories(req, res) {
         const {classID} = req.params;
         const stories = await StoriesModel.find({
             classID: mongoose.mongo.ObjectId(classID)
-        });
-        res.render('pages/class', {
+        })
+        res.render('pages/classStories', {
             classID,
             stories
-        })
-    }
-
-    showAddStudent(req, res) {
-        const {classID} = req.params;
-        res.render('pages/addStudent', {
-            classID
-        })
+        });
     }
 
     async showClassStudents(req, res) {
@@ -84,26 +46,67 @@ class PageController {
                 }
             }
         ]);
+        
         res.render('pages/classStudents', {
             classID,
             students: classes[0].students
         });
     }
-    
+
+    showAddStudent(req, res) {
+        const {classID} = req.params;
+        res.render('pages/addStudent', {
+            classID
+        })
+    }
+
     showAddStory(req, res) {
         const {classID} = req.params;
         res.render('pages/addStory', {classID})
     }
 
-    async showClassStories(req, res) {
+    async showTeacherHome(req, res) {
+        const classes = await ClassesModel.find();
+        res.render('pages/teacherHome', {classes});
+    }
+
+    async showClass(req, res) {
         const {classID} = req.params;
         const stories = await StoriesModel.find({
             classID: mongoose.mongo.ObjectId(classID)
-        })
-        res.render('pages/classStories', {
+        });
+        res.render('pages/class', {
             classID,
             stories
+        })
+    }
+
+    async showStudentHome(req, res) {
+        const user = req.user;
+        const classes = await ClassesModel.find({
+            studentsIDs: {
+            $in: mongoose.mongo.ObjectId(user._id)
+            }
         });
+        res.render('pages/studentHome', {
+            classes
+        });
+    }
+
+    showCreateClass(req, res) {
+        res.render('pages/createClass');
+    }
+
+    showHome(req, res) {
+        const {role} = req.user;
+        console.log(role)
+        if (role === 'teacher') {
+            pageController.showTeacherHome(req, res);
+        } else if (role === 'student') {
+            pageController.showStudentHome(req, res);
+        } else {
+            res.render('pages/error');
+        }
     }
 }
 

@@ -1,12 +1,38 @@
 <%- include('../partials/header')%>
+<link href="/css/login.css" rel="stylesheet" />
 <body>
-<form class="container" action="/users/register" method="post">
-    <a href="/users/login">Login</a>
-    <h1 class="mt-5 text-center">Register</h1>
-    <input name="name" placeholder="Enter username" />
-    <input name="email" type="email" placeholder="Enter email" />
-    <input name="password" placeholder="Enter password" type="password" />
-    <input name="confirm_password" placeholder="Enter confirm password" type="password" />
-    <button>Sign Up</button>
-</form>
+<%- include('../partials/headerBar')%>
+<div class="container">
+    <form class="wrapper" action="/users/register" method="post">
+        <div class="row h-100">
+            <div class="col-6 tipWrapper">
+                <h3>Welcome To STUM!</h3>
+            </div>
+            <div class="col-6 formWrapper">
+                <h2 class="mt-2">Log in</h2>
+                <div class="mb-3 mt-3">
+                    <label class="form-label text-secondary">Username</label>
+                    <input name="name" required class="form-control" placeholder="Enter your username" />
+                </div>
+                <div class="mb-3 mt-3">
+                    <label class="form-label text-secondary">Email</label>
+                    <input name="email" required class="form-control" type="email" placeholder="Enter your email" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-secondary">Password</label>
+                    <input name="password" required class="form-control" type="password" placeholder="Enter your password" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-secondary">Password</label>
+                    <input name="confirm_password" required class="form-control" type="password" placeholder="Enter your password again" />
+                </div>
+                <div class="mb-3 text-end">
+                    <a href="/users/login" class="btn btn-link">Sign In</a>
+                    <button class="btn btn-primary">Register</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
 </body>

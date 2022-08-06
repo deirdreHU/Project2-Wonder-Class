@@ -1,8 +1,8 @@
-const ClassesModel = require("../../models/Classes/classes.schema");
-const UsersModel = require("../../models/Users/user.schema")
+const ClassesModel = require("../../models/classes/classes.schema");
+const UsersModel = require("../../models/Users/user.schema");
+const StoriesModel = require("../../models/stories/stories.schema");
 const bcrypt = require('bcrypt')
 const mongoose = require("mongoose");
-
 
 class ClassesController {
     constructor() {}
@@ -12,7 +12,7 @@ class ClassesController {
             const user = req.user;
             const { name } = req.body;
 
-            const oldClass = await ClassesModel.findOne({name});
+            const oldClass = await ClassesModel.findOne({name});  
             if (oldClass) {
                 res.send("Class Exists!");
                 return
@@ -22,6 +22,7 @@ class ClassesController {
                 name,
                 teacherID: user._id
             });
+            console.log(newClass)
 
             res.redirect('/');
 
@@ -45,7 +46,7 @@ class ClassesController {
             const { classID } = req.params;
             const { email, name, password } = req.body;
 
-            const student = await UsesModel.findOne({name});
+            const student = await UsersModel.findOne({name});
             const classObject = await ClassesModel.findById(classID);
             let studentID;
             const hash = await bcrypt.hash(password, 10);
@@ -59,7 +60,7 @@ class ClassesController {
                 }
 
             } else {
-                let newStudent = await UsesModel.create({
+                let newStudent = await UsersModel.create({
                     role: 'student',
                     name,
                     email,
