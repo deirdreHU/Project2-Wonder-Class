@@ -42,7 +42,7 @@ class PageController {
             {
                 $lookup: {
                     from: 'users',
-                    localField: 'studentsIDs',
+                    localField: 'StudentIDs',
                     foreignField: '_id',
                     as: 'students'
                 }
@@ -86,7 +86,7 @@ class PageController {
     async showStudentHome(req, res) {
         const user = req.user;
         const classes = await ClassesModel.find({
-            studentsIDs: {
+            StudentIDs:{
             $in: mongoose.mongo.ObjectId(user._id)
             }
         });
@@ -101,11 +101,15 @@ class PageController {
 
     showHome(req, res) {
         const {roles} = req.user;
+
         console.log(req.user)
+
         if (roles.filter(role => role === "teacher").length > 0) {
             pageController.showTeacherHome(req, res);
+
         } else if (roles.filter(role => role === "student").length > 0) {
             pageController.showStudentHome(req, res);
+            
         } else {
             res.render('pages/error');
         }

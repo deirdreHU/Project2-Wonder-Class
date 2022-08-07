@@ -22,6 +22,7 @@ class ClassesController {
                 name,
                 teacherID: user._id
             });
+            
             console.log(newClass)
 
             res.redirect('/');
@@ -52,7 +53,7 @@ class ClassesController {
             const hash = await bcrypt.hash(password, 10);
     
             if (student) {
-                if (classObject.studentsIDs.find(item => item.toString() === student._id.toString())) {
+                if (classObject.StudentIDs.find(item => item.toString() === student._id.toString())) {
                     res.send("This student has been added!");
                     return
                 } else {
@@ -70,7 +71,7 @@ class ClassesController {
                 studentID = newStudent._id;
             }
             
-            classObject.studentsIDs.push(mongoose.mongo.ObjectId(studentID));
+            classObject.StudentIDs.push(mongoose.mongo.ObjectId(studentID));
             
             await classObject.save();
             

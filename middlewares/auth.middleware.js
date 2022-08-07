@@ -1,7 +1,7 @@
 module.exports = {
 
     isTeacher: (req, res, next) => {
-        if (req.session.user.role !== 'teacher') {
+        if (req.session.user.roles.filter(role => role === "teacher").length < 1) {
             res.redirect('/users/login');
             return
         }
