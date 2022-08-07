@@ -5,6 +5,36 @@ class UsersController {
     constructor() {
     }
 
+    async updateStudentProfile(req, res) {
+        try {
+            const user = req.user;
+            const { password, birthday } = req.body;
+            const hash = await bcrypt.hash(password, 10);
+            await UserModel.findByIdAndUpdate(user._id, {
+                password: password ? hash : user.password,
+                birthday
+            });
+            res.redirect('/profile/student');
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    
+    async updateTeacherProfile(req, res) {
+        try {
+            const user = req.user;
+            const { password, birthday } = req.body;
+            const hash = await bcrypt.hash(password, 10);
+            await UserModel.findByIdAndUpdate(user._id, {
+                password: password ? hash : user.password,
+                birthday
+            });
+            res.redirect('/profile/teacher');
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     async findStudentNames(req, res) {
         try {
             const {student_name} = req.params;

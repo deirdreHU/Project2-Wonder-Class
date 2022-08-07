@@ -42,6 +42,20 @@ class ClassesController {
         }
     }
 
+    async deleteStudent(req, res) {
+        try {
+            const { classID, studentID } = req.params;
+            await ClassesModel.update(
+                {_id: mongoose.mongo.ObjectId(classID)}, 
+                {$pullAll: {studentsIDs: [mongoose.mongo.ObjectId(studentID)]}}
+            )
+
+            res.redirect(`/class/${classID}/students`);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     async addStudent(req, res) {
         try {
             const { classID } = req.params;
@@ -98,7 +112,13 @@ class ClassesController {
             } catch (err) {
                 console.log(err);
             }
-        }
+    }
+
+    async deleteStory(req, res) {
+        const {storyID, classID} = req.params;
+        await StoriesModel.findByIdAndDelete(storyID);
+        res.redirect(`/class/${classID}/stories`);
+    }
 }
 
 module.exports = new ClassesController();

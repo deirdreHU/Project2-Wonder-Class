@@ -1,6 +1,8 @@
 const ClassesModel = require("../../models/classes/classes.schema");
 const StoriesModel = require("../../models/stories/stories.schema");
+const UsersModel = require("../../models/Users/user.schema")
 const mongoose = require("mongoose");
+const moment = require("moment");
 const {raw} = require("express");
 
 class PageController {
@@ -10,6 +12,31 @@ class PageController {
 
     showLogin(req, res) {
         res.render('pages/login');
+    }
+
+    async showStudentProfile(req, res) {
+        let user = req.user;
+        let userProfile = await UsersModel.findById(user._id).lean();
+        res.render('pages/studentProfile', {
+            user: userProfile
+        });
+    }
+    
+    async showTeacherProfile(req, res) {
+        let user = req.user;
+        let userProfile = await UsersModel.findById(user._id).lean();
+        res.render('pages/teacherProfile', {
+            user: userProfile
+        });
+    }
+
+    async showStory(req, res) {
+        const {storyID} = req.params;
+        const story = await StoriesModel.findById(storyID).populate("comments.commenter");
+        res.render('pages/story', {
+            storyID,
+            story
+        });
     }
 
     showRegister(req, res) {

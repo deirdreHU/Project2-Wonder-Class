@@ -12,6 +12,7 @@ const session = require('express-session')
 const UsersController = require("./controllers/users/users_controller");
 const PagesController = require("./controllers/pages/pages_controllers");
 const ClassesController = require("./controllers/classes/classes_controllers");
+const StoriesController = require("./controllers/Stories/stories_controller");
 const {registerValidator, loginValidator, createClassValidator} = require("./middlewares/validator");
 const {isAuthenticated, isTeacher} = require("./middlewares/auth.middleware");
 
@@ -44,6 +45,7 @@ app.get('/class/create', PagesController.showCreateClass);
 app.get('/class/delete/:classID', isAuthenticated, isTeacher, ClassesController.deleteClass);
 
 app.get('/class/:classID', isAuthenticated, PagesController.showClass);
+
 app.get('/class/:classID/students', isAuthenticated, isTeacher, PagesController.showClassStudents);
 app.get('/class/:classID/stories', isAuthenticated, isTeacher, PagesController.showClassStories);
 app.get('/class/detail/:classID', isAuthenticated, isTeacher, (req, res) => {
@@ -53,9 +55,20 @@ app.get('/class/detail/:classID', isAuthenticated, isTeacher, (req, res) => {
 
 app.get('/class/:classID/students/add', isAuthenticated, isTeacher, PagesController.showAddStudent);
 app.post('/class/:classID/students/add', isAuthenticated, isTeacher, ClassesController.addStudent);
+app.get('/class/:classID/students/:studentID/delete', isAuthenticated, isTeacher, ClassesController.deleteStudent);
 
 app.get('/class/:classID/stories/add', isAuthenticated, isTeacher, PagesController.showAddStory);
 app.post('/class/:classID/stories/add', isAuthenticated, isTeacher, ClassesController.addStory);
+app.get('/class/:classID/stories/:storyID/delete', isAuthenticated, isTeacher, ClassesController.deleteStory);
+
+app.get('/story/:storyID', isAuthenticated, PagesController.showStory);
+app.post('/story/:storyID/comment', isAuthenticated, StoriesController.addStoryCommit);
+
+app.get('/profile/teacher', isAuthenticated, isTeacher, PagesController.showTeacherProfile);
+app.post('/profile/teacher', isAuthenticated, isTeacher, UsersController.updateTeacherProfile);
+
+app.get('/profile/student', isAuthenticated, PagesController.showStudentProfile);
+app.post('/profile/student', isAuthenticated, UsersController.updateStudentProfile);
 
 app.listen(PORT, async () => {
     try {

@@ -1,0 +1,42 @@
+<%- include('../partials/header')%>
+<link href="/css/teacherHome.css" rel="stylesheet" />
+<body>
+<%- include('../partials/homeHeaderBar')%>
+<div class="container wrapper">
+    <div class="row">
+        <div class="col-2">
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Classes</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/teacher/profile" class="nav-link active">Profile</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-10 d-flex flex-wrap">
+            <form action="/profile/teacher" method="post">
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input value="<%=user.name%>" readonly disabled name="name"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input value="<%=user.email%>" readonly disabled name="email"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input name="password"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Birthday</label>
+                    <input value="<%=user.birthday || ''%>" name="birthday" type="date"/>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
