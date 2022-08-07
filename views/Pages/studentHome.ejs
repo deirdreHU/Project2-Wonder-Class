@@ -3,23 +3,31 @@
 <link href="/css/teacherHome.css" rel="stylesheet" />
 
 <body>
-
     <%- include('../partials/homeHeaderBar')%>
-
     <div class="container mt-3">
-        <% classes.forEach(function(item) { %>
-            <div class="card p-2 d-flex flex-column justify-content-between" style="width: 200px; height: 200px;">
-                
-                <p class="h5">
-                    <%=item.name%>
-                </p>
-
-                <div class="text-end">
-                    <a href="/class/<%=item._id%>" class="btn btn-primary mt-auto"><i class="bi bi-arrow-right"></i></a>
-                </div>
-
+        <div class="row">
+            <div class="col-2">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Classes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/profile/student" class="nav-link">Profile</a>
+                    </li>
+                </ul>
             </div>
-        <% }) %>
+            <div class="col-10">
+                <% classes.forEach(function(item) { %>
+                <div class="card p-2 d-flex flex-column justify-content-between" style="width: 200px; height: 200px;">
+                    <p class="h5">
+                        <%=item.name%>
+                    </p>
+                    <div class="text-end">
+                        <a href="/class/<%=item._id%>" class="btn btn-primary mt-auto"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
     </div>
-
 </body>

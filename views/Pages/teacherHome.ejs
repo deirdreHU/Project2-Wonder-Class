@@ -1,75 +1,51 @@
 <%- include('../partials/header')%>
-
 <link href="/css/teacherHome.css" rel="stylesheet" />
-
 <body>
-
     <%- include('../partials/homeHeaderBar')%>
-
     <div class="container wrapper">
-
         <div class="row">
             <div class="col-2">
-
                 <ul class="nav nav-pills flex-column">
                     <li class="nav-item">
                         <a class="nav-link active" href="/">Classes</a>
                     </li>
-                    
                     <li class="nav-item">
-                        <a class="nav-link">Others</a>
+                        <a href="/profile/teacher" class="nav-link">Profile</a>
                     </li>
                 </ul>
-
             </div>
-
             <div class="col-10 d-flex flex-wrap">
-
                 <% classes.forEach(function(classObject) { %>
-
                     <div class="card class-card me-2 mb-2 p-2">
-
                         <p class="fw-bold m-0">
                             <%= classObject.name %>
                         </p>
-
                         <p class="m-0">
                             <i class="bi bi-people-fill"></i>
                             <span>
                                 <%= classObject.StudentIDs.length %>
                             </span>
                         </p>
-
                         <p class="m-0">
                             <i class="bi bi-card-checklist"></i>
                             <span>
                                 <%= classObject.Stories.length %>
                             </span>
                         </p>
-
                         <p class="mt-auto text-end">
-
                             <a href="/class/delete/<%=classObject._id%>" class="btn btn-danger">
                                 <i class="bi bi-trash-fill"></i>
                             </a>
-
                             <a href="/class/detail/<%=classObject._id%>" class="btn btn-info text-white">
                                 <i class="bi bi-arrow-right"></i>
                             </a>
-
                         </p>
-
                     </div>
-
                 <%})%>
-
                 <a href="/class/create" class="create-class card class-card me-2 mb-2 p-2 d-flex align-items-center justify-content-center">
                     <i class="bi bi-plus-lg"></i>
                 </a>
             </div>
-
         </div>
-
     </div>
-    
 </body>
