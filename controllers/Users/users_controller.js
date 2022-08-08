@@ -101,7 +101,7 @@ class UsersController {
                     if (err) {
                     return next(err)
                 }
-                res.redirect('/')
+                res.redirect('/home')
                 })
             })
 

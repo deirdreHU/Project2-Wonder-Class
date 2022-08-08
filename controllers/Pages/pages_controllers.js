@@ -17,7 +17,6 @@ class PageController {
     showLogin(req, res) {
         res.render('pages/login');
     }
-
     
     showStudentLogin(req, res) {
         res.render('pages/studentLogin');
