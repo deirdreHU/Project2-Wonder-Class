@@ -4,7 +4,6 @@ const express = require("express");
 const methodOverride = require('method-override')
 const mongoose = require("mongoose");
 
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 const session = require('express-session')
@@ -29,12 +28,17 @@ app.use(session({
     cookie: { secure: false, httpOnly: false, maxAge: 7200000 }
 }))
 
-app.get('/', isAuthenticated, PagesController.showHome);
+app.get('/', PagesController.showEntry);
+
+app.get('/home', isAuthenticated, PagesController.showHome);
 
 app.get('/users/register', PagesController.showRegister);
 app.post('/users/register', registerValidator, UsersController.register);
-app.get('/users/login', PagesController.showLogin);
+
+app.get('/users/login/student', PagesController.showStudentLogin);
+app.get('/users/login/teacher', PagesController.showTeacherLogin);
 app.post('/users/login', loginValidator, UsersController.login);
+
 app.get('/users/logout', UsersController.logout);
 app.get('/users/profile', isAuthenticated, PagesController.showProfile);
 

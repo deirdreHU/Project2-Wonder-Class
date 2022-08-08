@@ -1,13 +1,57 @@
+
 <link href="/css/headerBar.css" rel="stylesheet"/>
+
 <div class="header-bar">
+
     <div class="container d-flex h-100 justify-content-between align-items-center">
-        <div class="d-flex align-items-center">
-            <img class="me-2" src="../../public/Icons/rainbow.png" width="40"/>
+        <a href="/" class="d-flex text-decoration-none text-black align-items-center">
+            <img class="me-2" src="/icons/rainbow.png" width="40"/>
             <h4>Wonder Class</h4>
-        </div>
+        </a>
         <div class="d-flex align-items-center">
-            <a href="/users/login" class="me-4 text-black text-decoration-none">Log in</a>
+            <a name="login" class="me-4 text-black text-decoration-none">Log in</a>
             <a href="/users/register" class="me-2 text-black text-decoration-none">Sign Up</a>
         </div>
     </div>
+
+    <div class="backdrop" id="backdrop" style="display: none">
+        <div class="card login-option">
+            <img src="/icons/rainbow.png" width="50px"/>
+            <p class="mt-3">
+                <strong>Log in to Wonder Class</strong>
+            </p>
+            <div class="w-100 d-flex justify-content-between">
+                <a href="/users/login/teacher" style="width: 100px; height: 100px" class="text-decoration-none option justify-content-center d-flex flex-column align-items-center border rounded-3">
+                    <img src="/icons/teacher.png" width="55px"/>
+                    <label class="text-black">Teacher</label>
+                </a>
+                <a href="/users/login/student" style="width: 100px; height: 100px" class="text-decoration-none option justify-content-center d-flex flex-column align-items-center border rounded-3">
+                    <img src="/icons/student.png" width="55px"/>
+                    <label class="text-black">Student</label>
+                </a>
+                <a style="width: 100px; height: 100px; background-color: gainsboro" class="text-decoration-none option justify-content-center d-flex flex-column align-items-center border rounded-3">
+                    <img src="/icons/school.png" width="55px"/>
+                    <label class="text-black">School</label>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+            const logins = document.getElementsByName('login');
+            const backdrop = document.querySelector('#backdrop');
+
+            backdrop.addEventListener('click', () => {
+                backdrop.style.display = 'none';
+            });
+
+            [...logins].forEach(login => {
+                login.addEventListener('click', () => {
+                    backdrop.style.display = 'flex';
+                })
+            })
+        }
+    </script>
+    
 </div>

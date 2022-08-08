@@ -4,8 +4,9 @@
     width: 700px;
     height: 500px;
     background: white;
+    /* background:url("../Images/login_register_background.png"); */
     border-radius: 10px;
-    box-shadow: 0 0 5px #333;
+    box-shadow: 0 0 10px gainsboro;
     overflow: hidden;
 }
 

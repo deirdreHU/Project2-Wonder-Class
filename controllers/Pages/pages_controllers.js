@@ -10,8 +10,21 @@ class PageController {
         
     }
 
+    showEntry(req, res) {
+        res.render('pages/home');
+    }
+
     showLogin(req, res) {
         res.render('pages/login');
+    }
+
+    
+    showStudentLogin(req, res) {
+        res.render('pages/studentLogin');
+    }
+
+    showTeacherLogin(req, res) {
+        res.render('pages/teacherLogin');
     }
 
     async showStudentProfile(req, res) {

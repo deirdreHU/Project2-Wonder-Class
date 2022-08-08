@@ -3,43 +3,40 @@
 <link href="/css/login.css" rel="stylesheet" />
 
 <body>
-
     <%- include('../partials/headerBar')%>
 
     <div class="container">
-        <form class="wrapper" action="/users/register" method="post">
+
+        <form class="wrapper" action="/users/login" method="post">
+
             <div class="row h-100">
-                <div class="col-6 tipWrapper" style="background: #B8DD72">
-                    <h3>Welcome!</h3>
+                <div class="col-6 tipWrapper">
+                    <h3>Welcome Back!</h3>
                     <div class="text-center mt-5">
-                        <img src="/Images/Register.png" width="80%"/>
+                        <img src="/Images/Login.png" width="80%"/>
                     </div>
                 </div>
+
                 <div class="col-6 formWrapper">
-                    <h2 class="mt-2">Register</h2>
+                    <h2 class="mt-2">Log in</h2>
                     <div class="mb-3 mt-3">
                         <label class="form-label text-secondary">Username</label>
                         <input name="name" required class="form-control" placeholder="Enter your username" />
-                    </div>
-                    <div class="mb-3 mt-3">
-                        <label class="form-label text-secondary">Email</label>
-                        <input name="email" required class="form-control" type="email" placeholder="Enter your email" />
                     </div>
                     <div class="mb-3">
                         <label class="form-label text-secondary">Password</label>
                         <input name="password" required class="form-control" type="password" placeholder="Enter your password" />
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label text-secondary">Password</label>
-                        <input name="confirm_password" required class="form-control" type="password" placeholder="Enter your password again" />
-                    </div>
                     <div class="mb-3 text-end">
-                        <a name="login" class="btn btn-link">Sign In</a>
-                        <button class="btn btn-primary">Register</button>
+                        <a href="/users/register" class="btn btn-link">Sign Up</a>
+                        <button class="btn btn-primary">Login</button>
                     </div>
                 </div>
+
             </div>
+
         </form>
+
     </div>
 
 </body>
