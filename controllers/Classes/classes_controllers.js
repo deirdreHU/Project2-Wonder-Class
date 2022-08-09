@@ -106,17 +106,23 @@ class ClassesController {
             const { classID } = req.params;
             const { title } = req.body;
                 
-            await StoriesModel.create({
+            const newStory = await StoriesModel.create({
                 classID: mongoose.mongo.ObjectId(classID),
                 title,
                 teacher: mongoose.mongo.ObjectId(user._id)
             });
             
+            let toUpdate = await ClassesModel.findById(classID);
+            toUpdate.Stories = [...toUpdate.Stories, newStory._id]
+
+            await ClassesModel.updateOne({_id: classID}, toUpdate);
+            
             res.redirect(`/class/${classID}/stories`);
-            } catch (err) {
-                console.log(err);
-            }
+        } catch (err) {
+            console.log(err);
+        }
     }
+    
 
     async deleteStory(req, res) {
         const {storyID, classID} = req.params;
