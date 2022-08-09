@@ -107,9 +107,11 @@ class PageController {
     async showTeacherHome(req, res) {
         const user = req.user;
         const classes = await ClassesModel.find({
-            teacherID: mongoose.mongo.ObjectId(user._id)
+            TeacherID: mongoose.mongo.ObjectId(user._id)
         });
+        console.log(user._id)
         res.render('pages/teacherHome', {classes});
+        console.log(classes)
     }
 
     async showClass(req, res) {

@@ -7,7 +7,7 @@ class StoriesController {
             const {storyID} = req.params;
             const {comment} = req.body;
             const user = req.user;
-        await StoriesModel.updateOne(
+        await StoriesModel.update(
             {_id: mongoose.mongo.ObjectId(storyID)}, 
             {
                 $push: {

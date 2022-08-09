@@ -12,18 +12,20 @@ class ClassesController {
             const user = req.user;
             const { name } = req.body;
             const oldClass = await ClassesModel.findOne({
-                teacherID: mongoose.mongo.ObjectId(user._id),
+                TeacherID: mongoose.mongo.ObjectId(user._id),
                 name
             });
 
             if (oldClass) {
-                return res.status(409).send("Class Exist!");
+                res.send("Class Exist!");
+                return
             }
 
             const newClass = await ClassesModel.create({
                 name,
-                teacherID: user._id
+                TeacherID: user._id
             });
+
             res.redirect('/home');
             
         } catch (err) {
@@ -43,13 +45,16 @@ class ClassesController {
 
     async deleteStudent(req, res) {
         try {
-            const { classID, StudentID } = req.params;
-            await ClassesModel.update(
+            const { classID, studentID } = req.params;
+            console.log(req.params)
+            await ClassesModel.updateOne(
                 {_id: mongoose.mongo.ObjectId(classID)}, 
-                {$pullAll: {studentsIDs: [mongoose.mongo.ObjectId(StudentID)]}}
+                {$pullAll: {
+                    StudentIDs: [mongoose.mongo.ObjectId(studentID)]
+                }}
             )
-
             res.redirect(`/class/${classID}/students`);
+
         } catch (err) {
             console.log(err);
         }

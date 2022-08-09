@@ -59,7 +59,7 @@ app.get('/class/detail/:classID', isAuthenticated, isTeacher, (req, res) => {
 
 app.get('/class/:classID/students/add', isAuthenticated, isTeacher, PagesController.showAddStudent);
 app.post('/class/:classID/students/add', isAuthenticated, isTeacher, ClassesController.addStudent);
-app.get('/class/:classID/students/:StudentID/delete', isAuthenticated, isTeacher, ClassesController.deleteStudent);
+app.get('/class/:classID/students/:studentID/delete', isAuthenticated, isTeacher, ClassesController.deleteStudent);
 
 app.get('/class/:classID/stories/add', isAuthenticated, isTeacher, PagesController.showAddStory);
 app.post('/class/:classID/stories/add', isAuthenticated, isTeacher, ClassesController.addStory);
