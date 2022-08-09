@@ -71,6 +71,7 @@
           let student_name = '';
           let student_list = [];
           const studentNameInput = document.querySelector('#student-name');
+          
           studentNameInput.addEventListener('input', (e) => {
             student_name = e.target.value;
             requestStudentList();

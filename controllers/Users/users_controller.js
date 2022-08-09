@@ -74,9 +74,9 @@ class UsersController {
 
     async login(req, res) {
         try {
-            const {username, password} = req.body;
+            const {name, password} = req.body;
             console.log("password value", password)
-            const user = await UserModel.findOne({username});
+            const user = await UserModel.findOne({name});
             console.log(user)
             const passwordMatches = await bcrypt.compare(password, user.password);
             
@@ -128,7 +128,7 @@ class UsersController {
                 password: hash
             });
             
-            res.redirect('/users/login');
+            res.redirect('/users/login/teacher');
         
         } catch (err) {
             console.log(err);

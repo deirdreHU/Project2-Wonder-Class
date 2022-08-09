@@ -17,4 +17,18 @@
             font-family: 'Raleway', serif;
         }
     </style>
+
+    <script>
+        function showMessage(message) {
+            alert(decodeURIComponent(message));
+        }
+        window.onload = function() {
+        let message = window.location.search.split('=')[1];
+        if (message) {
+            showMessage(message);
+        }
+
+        }
+    </script>
+
 </head>

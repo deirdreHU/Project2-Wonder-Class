@@ -11,24 +11,23 @@ class ClassesController {
         try {
             const user = req.user;
             const { name } = req.body;
+            const oldClass = await ClassesModel.findOne({
+                teacherID: mongoose.mongo.ObjectId(user._id),
+                name
+            });
 
-            const oldClass = await ClassesModel.findOne({name});  
             if (oldClass) {
-                res.send("Class Exists!");
-                return
+                return res.status(409).send("Class Exist!");
             }
 
             const newClass = await ClassesModel.create({
                 name,
                 teacherID: user._id
             });
+            res.redirect('/home');
             
-            console.log(newClass)
-
-            res.redirect('/');
-
         } catch (err) {
-            console.log(err);
+        console.log(err);
         }
     }
 
@@ -36,7 +35,7 @@ class ClassesController {
         try {
             const {classID} = req.params;
             await ClassesModel.findByIdAndDelete(classID);
-            res.redirect('/');
+            res.redirect('/home');
         } catch (err) {
             console.log(err);
         }
@@ -44,10 +43,10 @@ class ClassesController {
 
     async deleteStudent(req, res) {
         try {
-            const { classID, studentID } = req.params;
+            const { classID, StudentID } = req.params;
             await ClassesModel.update(
                 {_id: mongoose.mongo.ObjectId(classID)}, 
-                {$pullAll: {studentsIDs: [mongoose.mongo.ObjectId(studentID)]}}
+                {$pullAll: {studentsIDs: [mongoose.mongo.ObjectId(StudentID)]}}
             )
 
             res.redirect(`/class/${classID}/students`);
@@ -63,7 +62,7 @@ class ClassesController {
 
             const student = await UsersModel.findOne({name});
             const classObject = await ClassesModel.findById(classID);
-            let studentID;
+            let StudentID;
             const hash = await bcrypt.hash(password, 10);
     
             if (student) {
@@ -71,7 +70,7 @@ class ClassesController {
                     res.send("This student has been added!");
                     return
                 } else {
-                    studentID = student._id;
+                    StudentID = student._id;
                 }
 
             } else {
@@ -82,10 +81,10 @@ class ClassesController {
                     password: hash
                 });
 
-                studentID = newStudent._id;
+                StudentID = newStudent._id;
             }
             
-            classObject.StudentIDs.push(mongoose.mongo.ObjectId(studentID));
+            classObject.StudentIDs.push(mongoose.mongo.ObjectId(StudentID));
             
             await classObject.save();
             

@@ -6,9 +6,7 @@ const moment = require("moment");
 const {raw} = require("express");
 
 class PageController {
-    constructor() {
-        
-    }
+    constructor() { }
 
     showEntry(req, res) {
         res.render('pages/home');
@@ -107,7 +105,10 @@ class PageController {
     }
 
     async showTeacherHome(req, res) {
-        const classes = await ClassesModel.find();
+        const user = req.user;
+        const classes = await ClassesModel.find({
+            teacherID: mongoose.mongo.ObjectId(user._id)
+        });
         res.render('pages/teacherHome', {classes});
     }
 
@@ -139,16 +140,14 @@ class PageController {
     }
 
     showHome(req, res) {
-        const {roles} = req.user;
+        const {role} = req.user;
 
         console.log(req.user)
 
-        if (roles.filter(role => role === "teacher").length > 0) {
+        if (role === "teacher") {
             pageController.showTeacherHome(req, res);
-
-        } else if (roles.filter(role => role === "student").length > 0) {
+        } else if (role === "student") {
             pageController.showStudentHome(req, res);
-            
         } else {
             res.render('pages/error');
         }

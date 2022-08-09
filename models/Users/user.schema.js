@@ -6,6 +6,10 @@ const UsersSchema = new mongoose.Schema({
         required: true
     },
 
+    birthday: {
+        type: String
+    },
+
     name: {
         type: String,
         required: true
