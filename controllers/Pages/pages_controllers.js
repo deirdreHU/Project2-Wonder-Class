@@ -45,7 +45,8 @@ class PageController {
         const story = await StoriesModel.findById(storyID).populate("comments.commenter");
         res.render('pages/story', {
             storyID,
-            story
+            story,
+            role: req.session.user.role
         });
     }
 

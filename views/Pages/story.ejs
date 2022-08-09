@@ -8,10 +8,17 @@
     <div class="col-2">
         <ul class="nav nav-pills flex-column">            
             <li class="nav-item">
-                <a href="/home" class="nav-link">
-                    <i class="bi bi-arrow-left"></i>
-                    Back
-                </a>
+                <% if(role === "teacher") { %>
+                    <a href="/class/<%= story.classID.toString() %>/stories" class="nav-link">
+                        <i class="bi bi-arrow-left"></i>
+                        Back
+                    </a>
+                <% } else {%>
+                    <a href="/class/<%= story.classID.toString() %>" class="nav-link">
+                        <i class="bi bi-arrow-left"></i>
+                        Back
+                    </a>
+                <% } %>
             </li>
         </ul>
     </div>

@@ -8,22 +8,37 @@
 
     <div class="container mt-3">
 
-        <div class="container mt-3">
-            <% if (stories.length === 0) { %>
-                <h1>No Stories</h1>
-            <%}%>
+        <div class="row">
 
-            <% stories.forEach(function(item) { %>
-            <div class="card p-2 d-flex flex-column justify-content-between" style="width: 200px; height: 200px;">
-                <p class="h5">
-                    <%=item.title%>
-                </p>
-                
-                <div class="text-end">
-                    <a href="/story/<%=item._id%>" class="btn btn-primary mt-auto"><i class="bi bi-arrow-right"></i></a>
-                </div>
+            <div class="col-2">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a href="/home" class="nav-link">
+                            <i class="bi bi-arrow-left"></i>
+                            Back
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <% }) %>
+
+            <div class="container mt-3">
+                <% if (stories.length === 0) { %>
+                    <h1>No Stories</h1>
+                <%}%>
+
+                <% stories.forEach(function(item) { %>
+                <div class="card p-2 d-flex flex-column justify-content-between" style="width: 200px; height: 200px;">
+                    <p class="h5">
+                        <%=item.title%>
+                    </p>
+                    
+                    <div class="text-end">
+                        <a href="/story/<%=item._id%>" class="btn btn-primary mt-auto"><i class="bi bi-arrow-right"></i></a>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+
         </div>
 
     </div>
