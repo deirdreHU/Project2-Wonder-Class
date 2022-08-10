@@ -24,6 +24,7 @@
     </div>
 
     <div class="container mt-3">
+        <h2><%= story.title %></h2>
         <%story.comments.forEach(function(comment){%>
             <div class="card w-100 p-2">
                 <div class="d-flex align-items-center">
@@ -35,7 +36,7 @@
                 <p>
                     <%=comment.comment%>
                 </p>
-                <i class="text-secondary">2022/08/06</i>
+                <i class="text-secondary"><%= new Date(comment.createdTime).toLocaleDateString()%></i>
             </div>
         <%})%>
     
