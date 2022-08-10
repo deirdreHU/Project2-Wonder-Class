@@ -52,8 +52,10 @@
 <br>
 
 ## Additional Features
+---
 - Use "email" for users to register
 - Add the "student register" function
 - Add the "invite" function to allow teachers to invite the students
 - Add more conditions to complete the logic (when to delete the class/user/story?)
+- Enhance the UI
 
