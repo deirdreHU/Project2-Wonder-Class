@@ -51,3 +51,15 @@ exports.createClassValidator = function (req, res, next) {
     }
     next();
 }
+
+exports.resetPasswordValidator = function (req, res, next) {
+    const validator = Joi.object({
+        name: Joi.string().min(4).required(),
+    });
+    
+    let valid_results = validator.validate(req.body);
+    if (valid_results.error) {
+        return res.redirect(req.path + `?message=${valid_results.error.details[0].message}`)
+    }
+    next();
+}

@@ -19,6 +19,10 @@
     height: 100%;
 }
 
+.tipWrapper h3 {
+    padding:1rem;
+}
+
 .formWrapper {
     box-sizing: border-box;
     padding: 20px;

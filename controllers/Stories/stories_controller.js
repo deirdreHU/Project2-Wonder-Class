@@ -2,7 +2,7 @@ const StoriesModel = require("../../models/stories/stories.schema");
 const mongoose = require("mongoose");
 
 class StoriesController {
-    async addStoryCommit(req, res) {
+    async addStorycomment(req, res) {
         try {
             const {storyID} = req.params;
             const {comment} = req.body;

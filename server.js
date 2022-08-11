@@ -12,7 +12,7 @@ const UsersController = require("./controllers/users/users_controller");
 const PagesController = require("./controllers/pages/pages_controllers");
 const ClassesController = require("./controllers/classes/classes_controllers");
 const StoriesController = require("./controllers/Stories/stories_controller");
-const {registerValidator, loginValidator, createClassValidator} = require("./middlewares/validator");
+const {registerValidator, loginValidator, createClassValidator,resetPasswordValidator} = require("./middlewares/validator");
 const {isAuthenticated, isTeacher} = require("./middlewares/auth.middleware");
 
 // Set view engine
@@ -34,6 +34,9 @@ app.get('/home', isAuthenticated, PagesController.showHome);
 
 app.get('/users/register', PagesController.showRegister);
 app.post('/users/register', registerValidator, UsersController.register);
+
+app.get('/users/resetpassword', PagesController.showResetPassword);
+app.post('/users/resetpassword', resetPasswordValidator, UsersController.resetPassword);
 
 app.get('/users/login/student', PagesController.showStudentLogin);
 app.get('/users/login/teacher', PagesController.showTeacherLogin);
@@ -66,7 +69,7 @@ app.post('/class/:classID/stories/add', isAuthenticated, isTeacher, ClassesContr
 app.get('/class/:classID/stories/:storyID/delete', isAuthenticated, isTeacher, ClassesController.deleteStory);
 
 app.get('/story/:storyID', isAuthenticated, PagesController.showStory);
-app.post('/story/:storyID/comment', isAuthenticated, StoriesController.addStoryCommit);
+app.post('/story/:storyID/comment', isAuthenticated, StoriesController.addStorycomment);
 
 app.get('/profile/teacher', isAuthenticated, isTeacher, PagesController.showTeacherProfile);
 app.post('/profile/teacher', isAuthenticated, isTeacher, UsersController.updateTeacherProfile);

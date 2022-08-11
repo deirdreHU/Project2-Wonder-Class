@@ -20,6 +20,10 @@ class PageController {
         res.render('pages/studentLogin');
     }
 
+    showResetPassword(req,res) {
+        res.render('pages/resetPassword')
+    }
+
     showTeacherLogin(req, res) {
         res.render('pages/teacherLogin');
     }

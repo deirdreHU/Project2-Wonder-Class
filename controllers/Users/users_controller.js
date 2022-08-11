@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt')
 const UserModel = require("../../models/Users/user.schema");
+const crypto = require('crypto')
 
 class UsersController {
     constructor() {
@@ -137,6 +138,33 @@ class UsersController {
         }
     }
 
+    async resetPassword(req, res) {
+        try {
+            console.log(req.body);
+            const user = await UserModel.findOne({name: req.body.name});
+            if(!user) {
+                res.send("User doesn't exists");
+            }
+            else {
+                crypto.randomBytes(5, async (err, buffer) => {
+                    if(err) {
+                        throw err;
+                    }
+                    else {
+                        const newPassword = buffer.toString('hex');
+                        const hash = await bcrypt.hash(newPassword, 10);
+                        const newUser = await UserModel.findOneAndUpdate({name: req.body.name}, {password: hash});
+                        res.send("<p>Reset password successful. Your new password is " + newPassword + "</p> <p><a href=/>Click here to go home</a></p>");
+                    }
+                });
+            }
+        }
+        catch(err) {
+            console.log(err);
+            res.send("Failed to reset password");
+        }
+    }
 }
+
 
 module.exports = new UsersController();
