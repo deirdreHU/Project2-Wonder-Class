@@ -10,24 +10,24 @@ const PORT = process.env.PORT || 3000;
 const session = require('express-session')
 
 // const UsersController = require("./controllers/users/users_controller");
-const PagesController = require("./controllers/pages/pages_controllers");
+// const PagesController = require("./controllers/pages/pages_controllers");
 // const ClassesController = require("./controllers/classes/classes_controllers");
 // const StoriesController = require("./controllers/stories/stories_controller");
 // const {registerValidator, loginValidator, createClassValidator,resetPasswordValidator} = require("./middlewares/validator");
 // const {isAuthenticated, isTeacher} = require("./middlewares/auth.middleware");
 
 // Set view engine
-app.set('view engine', 'ejs')
+// app.set('view engine', 'ejs')
 
 // Apply middlewares
-app.use(express.urlencoded({extended: true}))
-app.use(express.static('public'))
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false, httpOnly: false, maxAge: 7200000 }
-}))
+// app.use(express.urlencoded({extended: true}))
+// app.use(express.static('public'))
+// app.use(session({
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { secure: false, httpOnly: false, maxAge: 7200000 }
+// }))
 
 // app.get('/', PagesController.showEntry);
 app.get('/', (req,res)=>{
