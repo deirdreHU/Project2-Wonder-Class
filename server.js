@@ -31,7 +31,7 @@ app.use(session({
 
 // app.get('/', PagesController.showEntry);
 app.get('/', (req,res)=>{
-    res.render("pages/home")
+    res.send("Hello")
 })
 
 // app.get('/home', isAuthenticated, PagesController.showHome);
