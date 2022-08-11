@@ -20,5 +20,9 @@
     "moment": "^2.29.4",
     "mongoose": "^6.5.0",
     "save": "^2.5.0"
+  },
+  "engines": {
+    "node": "18.x",
+    "npm":"8.x"
   }
 }
