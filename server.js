@@ -9,12 +9,12 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const session = require('express-session')
 
-const UsersController = require("./controllers/users/users_controller");
-const PagesController = require("./controllers/pages/pages_controllers");
-const ClassesController = require("./controllers/classes/classes_controllers");
-const StoriesController = require("./controllers/stories/stories_controller");
-const {registerValidator, loginValidator, createClassValidator,resetPasswordValidator} = require("./middlewares/validator");
-const {isAuthenticated, isTeacher} = require("./middlewares/auth.middleware");
+const UsersController = require("./controllers/users/users_controller.js");
+const PagesController = require("./controllers/pages/pages_controllers.js");
+const ClassesController = require("./controllers/classes/classes_controllers.js");
+const StoriesController = require("./controllers/stories/stories_controller.js");
+const {registerValidator, loginValidator, createClassValidator,resetPasswordValidator} = require("./middlewares/validator.js");
+const {isAuthenticated, isTeacher} = require("./middlewares/auth.middleware.js");
 
 // Set view engine
 app.set('view engine', 'ejs')
