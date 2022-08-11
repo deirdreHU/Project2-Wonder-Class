@@ -29,9 +29,10 @@ app.use(session({
     cookie: { secure: false, httpOnly: false, maxAge: 7200000 }
 }))
 
+// const PagesController = require("./controllers/pages/pages_controllers");
 // app.get('/', PagesController.showEntry);
 app.get('/', (req,res)=>{
-    res.send("Hello")
+    res.render("pages/home")
 })
 
 // app.get('/home', isAuthenticated, PagesController.showHome);
