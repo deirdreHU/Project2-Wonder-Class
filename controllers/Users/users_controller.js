@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt')
-const UserModel = require("../../models/Users/user.schema");
+const UserModel = require("../../models/users/user.schema");
 const crypto = require('crypto')
 
 class UsersController {
@@ -11,10 +11,12 @@ class UsersController {
             const user = req.user;
             const { password, birthday } = req.body;
             const hash = await bcrypt.hash(password, 10);
+
             await UserModel.findByIdAndUpdate(user._id, {
                 password: password ? hash : user.password,
                 birthday
             });
+
             res.redirect('/profile/student');
         } catch (err) {
             console.log(err);
@@ -26,10 +28,12 @@ class UsersController {
             const user = req.user;
             const { password, birthday } = req.body;
             const hash = await bcrypt.hash(password, 10);
+
             await UserModel.findByIdAndUpdate(user._id, {
                 password: password ? hash : user.password,
                 birthday
             });
+            
             res.redirect('/profile/teacher');
         } catch (err) {
             console.log(err);

@@ -1,6 +1,6 @@
 const ClassesModel = require("../../models/classes/classes.schema");
 const StoriesModel = require("../../models/stories/stories.schema");
-const UsersModel = require("../../models/Users/user.schema")
+const UsersModel = require("../../models/users/user.schema")
 const mongoose = require("mongoose");
 const moment = require("moment");
 const {raw} = require("express");
@@ -19,13 +19,13 @@ class PageController {
     showStudentLogin(req, res) {
         res.render('pages/studentLogin');
     }
-
-    showResetPassword(req,res) {
-        res.render('pages/resetPassword')
-    }
-
+    
     showTeacherLogin(req, res) {
         res.render('pages/teacherLogin');
+    }
+    
+    showResetPassword(req,res) {
+        res.render('pages/resetPassword')
     }
 
     async showStudentProfile(req, res) {
