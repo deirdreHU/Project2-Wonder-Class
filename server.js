@@ -29,7 +29,10 @@ app.use(session({
     cookie: { secure: false, httpOnly: false, maxAge: 7200000 }
 }))
 
-app.get('/', PagesController.showEntry);
+// app.get('/', PagesController.showEntry);
+app.get('/', (req,res)=>{
+    res.render("pages/home")
+})
 
 // app.get('/home', isAuthenticated, PagesController.showHome);
 
