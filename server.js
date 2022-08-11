@@ -4,7 +4,7 @@ const express = require("express");
 const methodOverride = require('method-override')
 const mongoose = require("mongoose");
 const connStr = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@gafirstlessontry.4sre1.mongodb.net/?retryWrites=true&w=majority`
-console.log(connStr)
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 const session = require('express-session')
