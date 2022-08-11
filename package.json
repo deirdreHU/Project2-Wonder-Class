@@ -7,8 +7,17 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deirdreHU/Project2-Wonder-Class.git"
+  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deirdreHU/Project2-Wonder-Class/issues"
+  },
+  "homepage": "https://github.com/deirdreHU/Project2-Wonder-Class#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.1",
@@ -20,9 +29,5 @@
     "moment": "^2.29.4",
     "mongoose": "^6.5.0",
     "save": "^2.5.0"
-  },
-  "engines": {
-    "node": "18.x",
-    "npm":"8.x"
   }
 }

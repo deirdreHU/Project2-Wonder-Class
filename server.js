@@ -12,7 +12,7 @@ const session = require('express-session')
 // const UsersController = require("./controllers/users/users_controller");
 const PagesController = require("./controllers/pages/pages_controllers");
 // const ClassesController = require("./controllers/classes/classes_controllers");
-// const StoriesController = require("./controllers/stories/stories_controller");
+// const StoriesController = require("./controllers/stories/stories_controller");
 // const {registerValidator, loginValidator, createClassValidator,resetPasswordValidator} = require("./middlewares/validator");
 // const {isAuthenticated, isTeacher} = require("./middlewares/auth.middleware");
 
