@@ -32,7 +32,7 @@ app.use(session({
 // const PagesController = require("./controllers/pages/pages_controllers");
 // app.get('/', PagesController.showEntry);
 app.get('/', (req,res)=>{
-    res.render("pages/home")
+    res.render("./pages/home.ejs")
 })
 
 // app.get('/home', isAuthenticated, PagesController.showHome);
