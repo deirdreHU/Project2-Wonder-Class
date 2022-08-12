@@ -32,6 +32,7 @@
 - **MomentJS**
 - **Joi**
 - **Bootstrap**
+- **crypto**
 
 <br>
 
