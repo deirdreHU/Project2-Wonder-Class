@@ -58,9 +58,9 @@ class PageController {
         res.render('pages/register');
     }
 
-    showProfile(req, res) {
-        res.render('pages/profile')
-    }
+    // showProfile(req, res) {
+    //     res.render('pages/profile')
+    // }
 
     async showClassStories(req, res) {
         const {classID} = req.params;

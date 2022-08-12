@@ -44,7 +44,7 @@ app.get('/users/login/teacher', PagesController.showTeacherLogin);
 app.post('/users/login', loginValidator, UsersController.login);
 
 app.get('/users/logout', UsersController.logout);
-app.get('/users/profile', isAuthenticated, PagesController.showProfile);
+// app.get('/users/profile', isAuthenticated, PagesController.showProfile);
 
 app.get('/students/find/:student_name', isAuthenticated, isTeacher, UsersController.findStudentNames); 
 

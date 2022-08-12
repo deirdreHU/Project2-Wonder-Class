@@ -11,9 +11,9 @@
 
 ## Links
 
-- Application Link
-- Wireframe and lo-Fi Prototype Design - XD file
-- Presentation - Slides
+- **[Application Link](https://wonder-class.herokuapp.com/)**
+- **[ireframe and lo-Fi Prototype Design - XD file](https://xd.adobe.com/view/a92a6a9e-69c1-4f1c-9006-eb0825cf8fe1-fc79/)**
+- **[Presentation - Slides](https://www.canva.com/design/DAFI7z_h194/Nv0ob4bSVhM8Mvo_Q9ThBg/view?utm_content=DAFI7z_h194&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)**
 
 <br>
 
