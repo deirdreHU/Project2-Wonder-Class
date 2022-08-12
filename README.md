@@ -36,6 +36,7 @@
 <br>
 
 ## RESTful Routes
+- **[Routes - Google Sheet](https://docs.google.com/spreadsheets/d/16zu-DgWpNu3oPLRenzfDIk8P-oqn9iy15o9I-prscag/edit?usp=sharing)**
 
 
 <br>
