@@ -1,7 +1,7 @@
 
 .wrapper {
     height: 92vh;
-    background: url("../Images/homepage_background.jpg") no-repeat center center;
+    background: url("../images/homepage_background.jpg") no-repeat center center;
     background-size: cover;
     position: relative;
 }
