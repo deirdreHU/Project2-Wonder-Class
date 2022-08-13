@@ -44,7 +44,6 @@
 
 ## Difficulites Faced
 
-
 - How to differenciate the roles when user login and show different pages
 - How to connect different models and make it work (E.g. populate the data, connect the backend and frontend)
 - How to make the functions work in ejs
@@ -55,6 +54,8 @@
 
 ## Additional Features
 
+- Show user avatars
+- Add "edit/delete comments" functions for users
 - Use "email" for users to register
 - Add the "student register" function
 - Add the "invite" function to allow teachers to invite the students

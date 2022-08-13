@@ -15,6 +15,10 @@ body {
     display:flex;
 }
 
+.story-card {
+    display:flex;
+}
+
 .individualStory { 
     margin-right: 2rem;
 
